@@ -6,68 +6,59 @@ using System.Threading.Tasks;
 
 namespace Library_Management_System
 {
-    internal class Library
+    public class Library
     {
-        private List<Book> books;
-        private List<Member> members;
+        private List<Book> _books;
+        private List<Member> _members;
 
         public Library()
         {
-            books = new List<Book>();
-            members = new List<Member>();
+            _books = new List<Book>();
+            _members = new List<Member>();
         }
 
         public void AddBook(Book book)
         {
-            books.Add(book); 
+            _books.Add(book);
+            Console.WriteLine("Book added successfully");
         }
+
         public void RemoveBook(string isbn)
         {
-            var bookToRemove = books.FirstOrDefault(b => b.ISBN == isbn);
+            var bookToRemove = _books.Find(b => b.ISBN == isbn);
             if (bookToRemove != null)
             {
-                books.Remove(bookToRemove);
+                _books.Remove(bookToRemove);
+                Console.WriteLine($"Book {bookToRemove.Title} removed successfully");
+            }
+            else
+            {
+                Console.WriteLine("Book not found!");
             }
         }
-        public void RegisterMember(Member member)
-        {
-            members.Add(member);
-        }
-        public void RemoveMember(string memberId)
-        {
-            var memberToRemove = members.FirstOrDefault(m => m.MemberId == memberId);
-            if(memberToRemove != null)
-            {
-                members.Remove(memberToRemove);
-            }
-        }
-        public void BorrowBook(string memberId, string isbn)
-        {
-            var member = members.FirstOrDefault(m => m.MemberId == memberId);
-            var book = books.FirstOrDefault(b => b.ISBN == isbn && !b.IsBorrowed);
-            if (book != null && member != null)
-            {
-                member.ManageBook(book, true);
-                book.IsBorrowed = true;
 
-            }  
-        }
-        public void ReturnBook(string memberId, string isbn)
-        {
-            var member = members.FirstOrDefault(m => m.MemberId == memberId);
-            var book = books.FirstOrDefault(b => b.ISBN == isbn && b.IsBorrowed);
-            if (book != null && member != null)
-            {
-                member.ManageBook(book, false);
-                book.IsBorrowed = false;
-            }
-        }
         public void DisplayBooks()
         {
-            foreach(var book in books)
-            {
 
-                Console.WriteLine($"{book.Title}, {book.Author}, {book.ISBN}, Borrowed: {book.IsBorrowed}");
+            Console.WriteLine("\nBooks in the Library");
+            foreach (var book in _books)
+            {
+                book.DisplayInfo();
+            }
+        }
+
+
+        public void RegisterMember(Member member)
+        {
+            _members.Add(member);
+            Console.WriteLine($"Member {member.Name} registered successfully");
+        }
+        public void DisplayMembers()
+        {
+            Console.WriteLine("\nRegistered Members: ");
+            foreach(var members in _members)
+            {
+                members.DisplayMemberInfo();
             }
         }
     }

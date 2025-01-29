@@ -6,29 +6,22 @@ using System.Threading.Tasks;
 
 namespace Library_Management_System
 {
-    internal class Member
+    public  class Member
     {
         public string Name { get; set; }
-        public string MemberId {  get; set; }
+        public string MemberID {  get; set; }
         public List<Book> BorrowedBooks { get; set; }
 
-        public Member(string name, string memberid)
+        public Member(string name, string memberId)
         {
             Name = name;
-            MemberId = memberid;
+            MemberID = memberId;
             BorrowedBooks = new List<Book>();
         }
-       public void ManageBook(Book book, bool isBorrowed)
+
+        public void DisplayMemberInfo()
         {
-            if (isBorrowed)
-            {
-                BorrowedBooks.Add(book);
-            }
-            else
-            {
-                BorrowedBooks.Remove(book);
-            }
+            Console.WriteLine($"Member Name: {Name}, ID: {MemberID}, Borrowed Books: {BorrowedBooks}");
         }
-        
     }
 }
