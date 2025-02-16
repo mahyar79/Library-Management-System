@@ -11,7 +11,7 @@ namespace Library_Management_System
     {
         public DbSet<Book> Books { get; set; }
         public DbSet<Member> Members { get; set; }
-
+        public DbSet<BorrowHistory> BorrowHistories { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             string dbPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "library.db");
@@ -19,7 +19,5 @@ namespace Library_Management_System
 
             //optionsBuilder.UseSqlite("Data Source=library.db");
         }
-
-
     }
 }

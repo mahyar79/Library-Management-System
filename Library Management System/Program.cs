@@ -20,7 +20,11 @@ namespace Library_Management_System
                 Console.WriteLine("5. Display Members");
                 Console.WriteLine("6. Borrow Book");
                 Console.WriteLine("7. Return Book");
-                Console.WriteLine("8. Exit");
+                Console.WriteLine("8. View Borrowing Hsitory");
+                Console.WriteLine("9. Search Books");
+                Console.WriteLine("10. Exit");
+
+
                 Console.Write("Choose an option: ");
 
                 string choice = Console.ReadLine();
@@ -73,6 +77,14 @@ namespace Library_Management_System
 
 
                     case "8":
+                        library.DisplayBorrowHistory();
+                        break;
+                    case "9":
+                        Console.WriteLine("Enter book title, author or isbn to search: ");
+                        string searchQuery = Console.ReadLine();
+                        library.SearchBooks(searchQuery);
+                        break;
+                    case "10":
                         exit = true;
                         Console.Write("Exiting...");
                         break;
